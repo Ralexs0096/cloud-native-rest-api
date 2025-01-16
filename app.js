@@ -16,9 +16,14 @@ module.exports = async function (fastify, opts) {
   // through your application
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
-    ingorePattern: /.*.no-load\.js/,
+    ignorePattern: /.*.no-load\.js/,
     indexPattern: /^no/i,
     options: Object.assign({}, opts)
+  })
+
+  fastify.register(AutoLoad, {
+    dir: path.join(__dirname, 'schemas'),
+    indexPattern: /^loader.js$/i,
   })
 
   // This loads all plugins defined in routes
